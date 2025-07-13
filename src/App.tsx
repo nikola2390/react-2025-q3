@@ -3,10 +3,12 @@ import './App.css';
 
 import { ResultView } from './components/ResultView/ResultView';
 import { SearchPanel } from './components/SearchPanel/SearchPanel';
+import { Spinner } from './components/Spinner/Spinner';
 
 type AppState = {
   query: string;
-  response: [] | null;
+  response: [];
+  loading: boolean;
 };
 
 class App extends Component<object, AppState> {
@@ -17,7 +19,8 @@ class App extends Component<object, AppState> {
 
     this.state = {
       query: savedQuery,
-      response: null,
+      response: [],
+      loading: true,
     };
   }
 
@@ -37,6 +40,7 @@ class App extends Component<object, AppState> {
       : '?expanded=true';
 
     localStorage.setItem('swapiPeopleSearch', this.state.query);
+    this.setState({ loading: true });
 
     fetch(`https://www.swapi.tech/api/people/${searchQuery}`)
       .then((res) => res.json())
@@ -45,7 +49,8 @@ class App extends Component<object, AppState> {
           response: data.result || data.results,
         });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => this.setState({ loading: false }));
   };
 
   render(): React.ReactNode {
@@ -56,10 +61,10 @@ class App extends Component<object, AppState> {
           onSubmit={this.handleSubmit}
           handleInputChange={this.handleInputChange}
         />
-        {this.state.response ? (
-          <ResultView data={this.state.response} />
+        {this.state.loading ? (
+          <Spinner />
         ) : (
-          <div>No result found</div>
+          <ResultView data={this.state.response} />
         )}
       </div>
     );
