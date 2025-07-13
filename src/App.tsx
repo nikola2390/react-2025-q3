@@ -56,7 +56,7 @@ class App extends Component<object, AppState> {
         {this.state.response ? (
           <ResultView data={this.state.response} />
         ) : (
-          <div>Response is empty</div>
+          <div>No result found</div>
         )}
       </div>
     );
