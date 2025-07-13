@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ResultView.css';
+
 interface ResultViewProps {
   data: [];
 }
@@ -27,22 +29,22 @@ export class ResultView extends React.Component<ResultViewProps> {
   render() {
     const { data } = this.props;
     if (data.length === 0) {
-      return <div>No result found</div>;
+      return <div className="empty">No result found</div>;
     }
 
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
+            <th className="headerCell">Name</th>
+            <th className="headerCell">Description</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item: Person) => (
-            <tr key={item.uid}>
-              <td>{item.properties.name}</td>
-              <td>
+            <tr key={item.uid} className="row">
+              <td className="cell">{item.properties.name}</td>
+              <td className="cell">
                 <pre>{this.createDescription(item.properties)}</pre>
               </td>
             </tr>

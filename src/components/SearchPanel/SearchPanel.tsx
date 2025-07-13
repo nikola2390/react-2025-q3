@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './SearchPanel.css';
+
 interface SearchPanelProps {
   query: string;
   onSubmit: (event: React.FormEvent) => void;
