@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import { ResultView } from './components/ResultView/ResultView';
+
 type AppState = {
   query: string;
-  response: string | null;
+  response: [] | null;
 };
 
 class App extends Component<object, AppState> {
@@ -25,7 +27,7 @@ class App extends Component<object, AppState> {
       .then((res) => res.json())
       .then((data) => {
         this.setState({
-          response: JSON.stringify(data.result),
+          response: data.result,
         });
       })
       .catch((err) => console.error(err));
@@ -47,7 +49,11 @@ class App extends Component<object, AppState> {
             </button>
           </form>
         </div>
-        <div className="result">{this.state.response || 'Result is empty'}</div>
+        {this.state.response ? (
+          <ResultView data={this.state.response} />
+        ) : (
+          <div>Response is empty</div>
+        )}
       </div>
     );
   }
