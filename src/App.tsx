@@ -32,14 +32,17 @@ class App extends Component<object, AppState> {
   handleSubmit = (event?: React.FormEvent) => {
     event?.preventDefault();
 
-    const searchQuery = this.state.query ? `?name=${this.state.query}` : '';
+    const searchQuery = this.state.query
+      ? `?name=${this.state.query}`
+      : '?expanded=true';
+
     localStorage.setItem('swapiPeopleSearch', this.state.query);
 
     fetch(`https://www.swapi.tech/api/people/${searchQuery}`)
       .then((res) => res.json())
       .then((data) => {
         this.setState({
-          response: data.result,
+          response: data.result || data.results,
         });
       })
       .catch((err) => console.error(err));
