@@ -12,19 +12,30 @@ type AppState = {
 class App extends Component<object, AppState> {
   constructor(props: object) {
     super(props);
+
+    const savedQuery = localStorage.getItem('swapiPeopleSearch') || '';
+
     this.state = {
-      query: '',
+      query: savedQuery,
       response: null,
     };
   }
 
+  componentDidMount(): void {
+    this.handleSubmit();
+  }
+
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ query: event.target.value });
+    this.setState({ query: event.target.value.trim() });
   };
 
-  handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    fetch(`https://www.swapi.tech/api/people/?name=${this.state.query}`)
+  handleSubmit = (event?: React.FormEvent) => {
+    event?.preventDefault();
+
+    const searchQuery = this.state.query ? `?name=${this.state.query}` : '';
+    localStorage.setItem('swapiPeopleSearch', this.state.query);
+
+    fetch(`https://www.swapi.tech/api/people/${searchQuery}`)
       .then((res) => res.json())
       .then((data) => {
         this.setState({
