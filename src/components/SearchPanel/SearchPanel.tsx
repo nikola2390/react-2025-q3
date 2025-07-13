@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './SearchPanel.css';
 
@@ -8,7 +8,7 @@ interface SearchPanelProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export class SearchPanel extends React.Component<SearchPanelProps> {
+export class SearchPanel extends Component<SearchPanelProps> {
   render() {
     const { query, onSubmit, handleInputChange } = this.props;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import './ResultView.css';
 
@@ -21,7 +21,7 @@ interface PersonDescription {
   eye_color: string;
 }
 
-export class ResultView extends React.Component<ResultViewProps> {
+export class ResultView extends Component<ResultViewProps> {
   createDescription(info: PersonDescription) {
     return `Year of birth: ${info.birth_year}\n Gender: ${info.gender}\n Height: ${info.height}\n Mass: ${info.mass}\n Hair color: ${info.hair_color}\n Eye color: ${info.eye_color}`;
   }

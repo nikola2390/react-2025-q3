@@ -53,7 +53,7 @@ class App extends Component<object, AppState> {
       .finally(() => this.setState({ loading: false }));
   };
 
-  render(): React.ReactNode {
+  render() {
     return (
       <div className="content-wrapper">
         <SearchPanel
