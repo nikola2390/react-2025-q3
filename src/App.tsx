@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { ResultView } from './components/ResultView/ResultView';
+import { SearchPanel } from './components/SearchPanel/SearchPanel';
 
 type AppState = {
   query: string;
@@ -36,19 +37,11 @@ class App extends Component<object, AppState> {
   render(): React.ReactNode {
     return (
       <div className="content-wrapper">
-        <div className="search-section">
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search"
-              className="search"
-              onChange={this.handleInputChange}
-            />
-            <button type="submit" className="search-btn">
-              Search
-            </button>
-          </form>
-        </div>
+        <SearchPanel
+          query={this.state.query}
+          onSubmit={this.handleSubmit}
+          handleInputChange={this.handleInputChange}
+        />
         {this.state.response ? (
           <ResultView data={this.state.response} />
         ) : (
