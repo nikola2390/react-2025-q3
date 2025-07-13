@@ -13,6 +13,10 @@ export class ResultView extends React.Component<ResultViewProps> {
   render() {
     const { data } = this.props;
 
+    if (data.length === 0) {
+      return <div>No result found</div>;
+    }
+
     return (
       <table>
         <thead>
