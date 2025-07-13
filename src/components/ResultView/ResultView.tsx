@@ -36,8 +36,8 @@ export class ResultView extends Component<ResultViewProps> {
       <table className="table">
         <thead>
           <tr>
-            <th className="headerCell">Name</th>
-            <th className="headerCell">Description</th>
+            <th className="header-cell">Name</th>
+            <th className="header-cell">Description</th>
           </tr>
         </thead>
         <tbody>
