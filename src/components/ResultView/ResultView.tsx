@@ -3,15 +3,15 @@ import { Component } from 'react';
 import './ResultView.css';
 
 interface ResultViewProps {
-  data: [];
+  data?: Person[];
 }
 
-interface Person {
+export interface Person {
   uid: string;
   properties: PersonDescription;
 }
 
-interface PersonDescription {
+export interface PersonDescription {
   name: string;
   birth_year: string;
   gender: string;
@@ -28,7 +28,7 @@ export class ResultView extends Component<ResultViewProps> {
 
   render() {
     const { data } = this.props;
-    if (data.length === 0) {
+    if (data?.length === 0) {
       return <div className="empty">No result found</div>;
     }
 
@@ -41,7 +41,7 @@ export class ResultView extends Component<ResultViewProps> {
           </tr>
         </thead>
         <tbody>
-          {data.map((item: Person) => (
+          {data?.map((item: Person) => (
             <tr key={item.uid} className="row">
               <td className="cell">{item.properties.name}</td>
               <td className="cell">
